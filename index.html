@@ -13,18 +13,24 @@
     <p>You have 10 attempts to guess the right number.</p>
     </br>
     <div id="wrapper">
-        <form class="form">
-            <label2 for="guessField" id="guess">Guess a number</label>
-            <input type="text" id="guessField" class="guessField">
+        <form class="form" @submit.prevent="addGuess">
+            <label for="guessField" id="guess">Guess a number</label>
+            <input type="text" id="guessField" class="guessField" v-model.lazy="guess">
             <input type="submit" id="subt" value="Submit guess" class="guessSubmit">
         </form>
 
         <div class="resultParas">
-            <p >Previous Guesses: <span class="guesses"></span></p>
-            <p >Guesses Remaining: <span class="lastResult">10</span></p>
-            <p class="lowOrHi"></p>
+            <p >Previous Guesses: {{prevGuesses}}</span></p>
+            <p >Guesses Remaining: {{remainingGuesses}}</span></p>
+            <h1 v-if="gameOver" @click="startGame">Start New Game</h1>
+        </div>
+        <div>
+            <h1 v-if="num==guess">You guessed correctly!</p>
+            <h1 v-else-if="num>guess">Too low! Try again!</p>
+            <h1 v-else-if="num<guess">Too High! Try again!</p>
         </div>
     </div>
+    <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>
 </body>
 </html>
